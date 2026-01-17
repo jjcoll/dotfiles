@@ -1,11 +1,15 @@
 # Ignore everything
 *
 
-# But not these folders
+# But not these folders and their contents
 !aerospace/
+!aerospace/**
 !tmux/
+!tmux/**
 !nvim/
+!nvim/**
 !ghostty/
+!ghostty/**
 
 # And not the gitignore itself
 !.gitignore
