@@ -9,8 +9,9 @@ return {
             ignored = true,
           },
           files = {
-            hidden = true,  -- show dotfiles in fuzzy finder
-            ignored = true, -- show gitignored files (node_modules etc. excluded via ~/.fdignore)
+            hidden = true,  -- show dotfiles and hidden files
+            ignored = true, -- show gitignored files (e.g. .env)
+            exclude = { "node_modules", ".git", "dist", ".next", "build", ".cache", "__pycache__", ".venv", "venv", "target" },
           },
         },
       },
