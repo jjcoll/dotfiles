@@ -9,8 +9,8 @@ return {
             ignored = true,
           },
           files = {
-            hidden = true, -- show dotfiles in fuzzy finder
-            -- ignored = true, -- optional: show gitignored files
+            hidden = true,  -- show dotfiles in fuzzy finder
+            ignored = true, -- show gitignored files (node_modules etc. excluded via ~/.fdignore)
           },
         },
       },
