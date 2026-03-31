@@ -13,3 +13,6 @@
 
 # And not the gitignore itself
 !.gitignore
+
+# Ignore TPM installed plugins (like node_modules)
+tmux/plugins/
