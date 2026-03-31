@@ -10,7 +10,7 @@ return {
           },
           files = {
             hidden = true, -- show dotfiles in fuzzy finder
-            ignored = true, -- optional: show gitignored files
+            -- ignored = true, -- optional: show gitignored files
           },
         },
       },
