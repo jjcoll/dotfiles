@@ -10,6 +10,8 @@
 !nvim/**
 !ghostty/
 !ghostty/**
+!zsh/
+!zsh/**
 
 # And not the gitignore itself
 !.gitignore
