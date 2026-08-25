@@ -12,6 +12,8 @@
 !ghostty/**
 !zsh/
 !zsh/**
+!claude/
+!claude/**
 
 # And not the gitignore itself
 !.gitignore
