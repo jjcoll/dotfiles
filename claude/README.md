@@ -14,7 +14,7 @@ line totals nested in parens. Bottom row: cwd (`~`-shortened) and git branch.
 ## Install
 
 ```sh
-ln -s ~/dotfiles/claude/statusline-command.sh ~/.claude/statusline-command.sh
+ln -s ~/.config/claude/statusline-command.sh ~/.claude/statusline-command.sh
 ```
 
 Then merge into `~/.claude/settings.json` (path must be absolute, adjust for the
