@@ -4,7 +4,7 @@ return {
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "latte",
+      flavour = "macchiato",
       integrations = {
         aerial = true,
         alpha = true,
@@ -33,10 +33,11 @@ return {
       },
     },
   },
+  { "EdenEast/nightfox.nvim", priority = 1000 },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "nordfox",
     },
   },
 }
