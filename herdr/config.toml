@@ -1,0 +1,50 @@
+[theme]
+name = "nord"
+auto_switch = false
+
+[ui]
+status_indicators = "symbols"
+
+show_agent_labels_on_pane_borders = true
+[ui.sound]
+enabled = true
+
+[ui.toast]
+delivery = "terminal"
+
+# --- Keymap: tmux parity (~/.config/tmux/tmux.conf) ---
+[keys]
+# Spaces ≈ tmux sessions → prefix+s, matching `bind s choose-tree`
+workspace_picker = "prefix+s"
+settings         = "prefix+comma"   # displaced from prefix+s
+
+# tmux muscle memory
+detach        = "prefix+d"          # was prefix+q
+reload_config = "prefix+r"          # was prefix+shift+r
+resize_mode   = "prefix+shift+r"    # displaced from prefix+r
+
+# Splits: herdr names the divider, tmux names the motion — so they invert.
+# tmux `bind "'" split-window -v` (stacked)      → split_horizontal
+# tmux `bind '"' split-window -h` (side-by-side) → split_vertical
+split_horizontal = "prefix+'"
+split_vertical   = "prefix+\""
+
+# tmux `bind -r C-hjkl resize-pane`. No auto-repeat here; prefix+shift+r for that.
+resize_pane_left  = "prefix+ctrl+h"
+resize_pane_down  = "prefix+ctrl+j"
+resize_pane_up    = "prefix+ctrl+k"
+resize_pane_right = "prefix+ctrl+l"
+
+# Spaces-as-sessions extras
+switch_workspace = "prefix+shift+1..9"
+focus_agent      = "prefix+alt+1..9"
+
+# Navigate mode: j/k drive workspaces (vim-style), arrows drive panes.
+# Swap needed because navigate_pane_up/down default to k/j — same keys.
+navigate_workspace_up   = "k"
+navigate_workspace_down = "j"
+navigate_pane_up   = "up"
+navigate_pane_down = "down"
+
+# Copy mode: tmux `bind Escape copy-mode`, keeping the default prefix+[ too.
+copy_mode = ["prefix+esc", "prefix+["]

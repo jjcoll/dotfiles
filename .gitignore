@@ -15,8 +15,15 @@
 !claude/
 !claude/**
 
+# herdr: config + docs only — logs, sockets and session.json stay local
+!herdr/
+!herdr/config.toml
+!herdr/README.md
+
 # And not the gitignore itself
 !.gitignore
 
 # Ignore TPM installed plugins (like node_modules)
 tmux/plugins/
+# Editor/tool backups
+*.bak
