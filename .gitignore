@@ -23,6 +23,9 @@
 # starship prompt config
 !starship.toml
 
+# Repo docs
+!README.md
+
 # And not the gitignore itself
 !.gitignore
 
