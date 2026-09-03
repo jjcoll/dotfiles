@@ -2,14 +2,14 @@
 # Why each block exists, and what was removed: see ./.zshrc.md
 
 # --- prompt -------------------------------------------------------------
-# Plain zsh, no framework: cwd, the exit code when non-zero, and the sigil.
-# Git is deliberately absent — herdr's sidebar and Claude Code both show the
-# branch already. See .zshrc.md § Prompt to add vcs_info or starship.
-# %2~ = last two path segments; leading newline separates commands in scrollback;
-# %(?..) shows the exit code only when non-zero; RPROMPT time auto-hides on long
-# lines. `%2~` -> `%~` for the full path.
-PROMPT=$'\n%F{cyan}%2~%f %(?..%F{red}%?%f )%F{green}%#%f '
-RPROMPT='%F{240}%*%f'
+# starship: config in ~/.config/starship.toml (tracked). Falls back to a plain
+# zsh prompt if the binary is missing, so a fresh machine still works.
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+else
+  PROMPT=$'\n%F{cyan}%2~%f %(?..%F{red}%?%f )%F{green}%#%f '
+  RPROMPT='%F{240}%*%f'
+fi
 
 # --- shell behaviour (was oh-my-zsh lib/) -------------------------------
 bindkey -e

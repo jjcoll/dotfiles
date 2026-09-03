@@ -20,6 +20,9 @@
 !herdr/config.toml
 !herdr/README.md
 
+# starship prompt config
+!starship.toml
+
 # And not the gitignore itself
 !.gitignore
 
