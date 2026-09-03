@@ -1,33 +1,33 @@
 # zsh setup
 
-Mirror of zsh config (oh-my-zsh + plugins + custom).
+Plain zsh — no framework. Rationale and measurements: [.zshrc.md](./.zshrc.md).
 
-## New machine setup
+## New machine
 
 ```sh
-# 1. Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# 1. Plugins (plain git clones, no framework)
+mkdir -p ~/.zsh/plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.zsh/plugins/zsh-syntax-highlighting
 
-# 2. Install external plugins (not bundled with omz)
-git clone https://github.com/zsh-users/zsh-autosuggestions \
-  ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting \
-  ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+# 2. Node (optional)
+brew install nvm && mkdir -p ~/.nvm
+nvm install --lts && nvm alias default lts/*
 
-# 3. Install nvm (optional — only if you use Node)
-brew install nvm
-mkdir -p ~/.nvm
-
-# 4. Symlink this .zshrc (overwrite the one omz installed)
+# 3. Symlink
 ln -sf ~/.config/zsh/.zshrc ~/.zshrc
 
-# 5. Reload
+# 4. Reload
 exec zsh
 ```
 
-## Excluded from this repo (machine-specific or one-off)
+Everything else in `.zshrc` is guarded — missing tools are skipped silently.
 
-- conda init block — re-run `conda init zsh` after installing anaconda/miniconda
-- gcloud SDK path — re-run `gcloud init` after installing the SDK
-- Antigravity PATH entry — only needed if that tool is installed
-- p10k instant prompt — theme is `candy`, not p10k (dead code in original)
+## Not in this repo
+
+- `~/.zshrc.local` — secrets (API tokens). Machine-local, never committed.
+- conda — install anaconda at `/opt/anaconda3`; the lazy shim picks it up.
+- gcloud SDK — re-run `gcloud init`; adjust the path in `.zshrc` if it lands
+  somewhere other than `~/Downloads/google-cloud-sdk`.
+- Antigravity / bun / maestro / libpq PATH entries — harmless if absent.
+- A prompt. Currently a placeholder, see [.zshrc.md](./.zshrc.md#prompt--deliberately-unfinished).

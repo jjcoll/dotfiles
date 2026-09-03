@@ -1,33 +1,77 @@
-# Path to oh-my-zsh installation
-export ZSH="$HOME/.oh-my-zsh"
+# ~/.zshrc — symlinked from ~/.config/zsh/.zshrc (dotfiles repo)
+# Why each block exists, and what was removed: see ./.zshrc.md
 
-# Theme
-ZSH_THEME="candy"
+# --- prompt -------------------------------------------------------------
+# Placeholder, deliberately dumb. Pick a real one later (p10k config already
+# sits unused at ~/.p10k.zsh). See .zshrc.md § Prompt.
+PROMPT='%F{cyan}%~%f %F{green}%#%f '
 
-# Plugins (zsh-autosuggestions and zsh-syntax-highlighting are external — see install notes)
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+# --- shell behaviour (was oh-my-zsh lib/) -------------------------------
+bindkey -e
+setopt AUTO_CD INTERACTIVE_COMMENTS
 
-source $ZSH/oh-my-zsh.sh
+HISTFILE=~/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt EXTENDED_HISTORY SHARE_HISTORY INC_APPEND_HISTORY \
+       HIST_EXPIRE_DUPS_FIRST HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_VERIFY
 
-# p10k (only loads if config exists)
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# Completion. -C skips the security audit; the dump is rebuilt if >24h old.
+autoload -Uz compinit
+setopt EXTENDED_GLOB
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then compinit; else compinit -C; fi
 
-# nvm (homebrew install — works on both Apple Silicon and Intel)
+# --- plugins (syntax-highlighting must be last) -------------------------
+ZSH_PLUGINS="$HOME/.zsh/plugins"
+[ -r "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh" ] \
+  && source "$ZSH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -r "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ] \
+  && source "$ZSH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# --- node ---------------------------------------------------------------
+# Default version straight on PATH; nvm.sh (0.9s) loads only when called.
 export NVM_DIR="$HOME/.nvm"
-if command -v brew >/dev/null 2>&1; then
-  NVM_PREFIX="$(brew --prefix nvm 2>/dev/null)"
-  [ -s "$NVM_PREFIX/nvm.sh" ] && \. "$NVM_PREFIX/nvm.sh"
-  [ -s "$NVM_PREFIX/etc/bash_completion.d/nvm" ] && \. "$NVM_PREFIX/etc/bash_completion.d/nvm"
+NVM_DEFAULT="$(cat "$NVM_DIR/alias/default" 2>/dev/null)"
+[ -n "$NVM_DEFAULT" ] && PATH="$NVM_DIR/versions/node/v${NVM_DEFAULT#v}/bin:$PATH"
+unset NVM_DEFAULT
+nvm() {
+  unset -f nvm
+  local prefix="$(brew --prefix nvm 2>/dev/null)"
+  [ -s "$prefix/nvm.sh" ] && . "$prefix/nvm.sh"
+  nvm "$@"
+}
+
+# --- conda (lazy; auto_activate_base is off, python3 is homebrew's) -----
+if [ -x /opt/anaconda3/bin/conda ]; then
+  conda() {
+    unset -f conda
+    eval "$(/opt/anaconda3/bin/conda shell.zsh hook)"
+    conda "$@"
+  }
 fi
 
-# envman
+# --- PATH ---------------------------------------------------------------
+export BUN_INSTALL="$HOME/.bun"
+PATH="$BUN_INSTALL/bin:$PATH"
+PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+PATH="$HOME/.antigravity/antigravity/bin:$PATH"
+PATH="$PATH:$HOME/.maestro/bin"
+export PATH
+
+# --- tool init ----------------------------------------------------------
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
+# gcloud SDK still lives under ~/Downloads — see .zshrc.md § Landmines
+GCLOUD_SDK="$HOME/Downloads/google-cloud-sdk"
+[ -f "$GCLOUD_SDK/path.zsh.inc" ] && . "$GCLOUD_SDK/path.zsh.inc"
+[ -f "$GCLOUD_SDK/completion.zsh.inc" ] && . "$GCLOUD_SDK/completion.zsh.inc"
+unset GCLOUD_SDK
 
-# Aliases
-alias vim="nvim"
-alias code="/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code"
+# --- aliases ------------------------------------------------------------
+alias ls='ls -G'
+alias vim='nvim'
+alias code='/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code'
+lsrecent() { ls -ltU | head -${1:-10}; }
 
-# Print N most recent files (default 10)
-lsrecent() {
-  ls -ltU | head -${1:-10}
-}
+# --- secrets (untracked, machine-local) ---------------------------------
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
