@@ -2,8 +2,16 @@ background-opacity=1
 font-family=Maple Mono NL
 font-size=14
 
-theme = light:Catppuccin Latte,dark:Nordfox
+theme = Nordfox
 
 # Option key sends Alt/Meta so opt+backspace = delete-word.
 # left = left Option only; right Option still types é/ñ/etc.
 macos-option-as-alt = left
+
+# Dark-only: panes on nordfox bg0, darker than the theme default bg1, so
+# herdr chrome reads as a layer above them.
+background = #2e3440
+
+# Steady block cursor; Claude Code never emits DECSCUSR so shape is ours to set.
+cursor-style = block
+cursor-style-blink = false
