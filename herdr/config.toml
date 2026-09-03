@@ -1,11 +1,36 @@
 [theme]
+# Base nord, overridden to nightfox's nordfox palette below.
 name = "nord"
 auto_switch = false
 
+[theme.custom]
+accent = "#5e81ac"        # nord10 — Nord's own selection blue, reads as a fill
+panel_bg = "#2e3440"      # bg1 — panes
+sidebar_bg = "#232831"    # bg0 — chrome sits BELOW the panes, so dim fg still reads
+active_row_bg = "#2e3440" # bg1
+selection_bg = "#39404f"  # bg2
+red = "#bf616a"
+green = "#a3be8c"
+yellow = "#ebcb8b"
+blue = "#81a1c1"
+teal = "#88c0d0"
+
+# Dim/secondary text. Nord's defaults sink into bg0 — these are nordfox fg2/fg3,
+# and they drive inactive tab labels and sidebar headers.
+text = "#cdcecf"        # fg1
+subtext0 = "#abb1bb"    # fg2
+overlay1 = "#abb1bb"    # fg2 — inactive tab labels
+overlay0 = "#8d95a3"    # between fg3 and fg2, still reads on bg0
+surface0 = "#39404f"    # bg2
+surface1 = "#444c5e"    # bg3
+surface_dim = "#232831" # bg0
+
 [ui]
-status_indicators = "symbols"
+status_indicators = "dots"
 
 show_agent_labels_on_pane_borders = true
+
+agent_panel_sort = "spaces"
 [ui.sound]
 enabled = true
 
@@ -35,6 +60,13 @@ resize_pane_down  = "prefix+ctrl+j"
 resize_pane_up    = "prefix+ctrl+k"
 resize_pane_right = "prefix+ctrl+l"
 
+# Direct (prefix-less) pane focus. Prefix mode dims the unfocused panes while
+# it's open; navigating without prefix avoids that flash. Prefix binds kept.
+focus_pane_left  = ["prefix+h", "alt+h"]
+focus_pane_down  = ["prefix+j", "alt+j"]
+focus_pane_up    = ["prefix+k", "alt+k"]
+focus_pane_right = ["prefix+l", "alt+l"]
+
 # Spaces-as-sessions extras
 switch_workspace = "prefix+shift+1..9"
 focus_agent      = "prefix+alt+1..9"
@@ -46,5 +78,20 @@ navigate_workspace_down = "j"
 navigate_pane_up   = "up"
 navigate_pane_down = "down"
 
-# Copy mode: tmux `bind Escape copy-mode`, keeping the default prefix+[ too.
-copy_mode = ["prefix+esc", "prefix+["]
+# Copy mode. prefix+v is free since split_vertical moved to prefix+", and it
+# mirrors `v` starting a selection once inside. Default prefix+[ still works.
+copy_mode = ["prefix+v", "prefix+["]
+
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [
+  ["state_icon", { token = "workspace", fg = "#e5e9f0", bold = true, dim = false }],
+  [{ token = "branch", fg = "#81a1c1", dim = false }, { token = "git_status", fg = "#ebcb8b", dim = false }],
+]
+
+[ui.sidebar.agents]
+row_gap = 1
+rows = [
+  ["state_icon", { token = "workspace", fg = "#e5e9f0", bold = true, dim = false }, { token = "tab", fg = "#abb1bb", dim = false }],
+  [{ token = "state_text", fg = "#a3be8c", dim = false }, { token = "agent", fg = "#81a1c1", dim = false }],
+]

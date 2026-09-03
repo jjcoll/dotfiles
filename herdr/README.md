@@ -50,6 +50,7 @@ Prefix is `ctrl+b`.
 | `prefix+'` | split stacked | `prefix+minus` |
 | `prefix+"` | split side-by-side | `prefix+v` |
 | `prefix+ctrl+h/j/k/l` | resize pane | unbound |
+| `prefix+v` | copy mode | `prefix+[` (still bound) |
 | `prefix+shift+1..9` | switch workspace | unbound |
 | `prefix+alt+1..9` | focus agent | unbound |
 
@@ -75,6 +76,27 @@ Navigate mode has its own keymap that shadows the bindings above while open.
 Vim keys drive workspaces because that's the outer level. Panes moved to the
 arrows since `navigate_pane_up/down` default to `k`/`j` and would collide.
 Left/right arrows are hardwired to pane-left/right and can't be rebound.
+
+## Copy mode
+
+`prefix+v` (or `prefix+[`). `prefix+v` is free because `split_vertical` moved
+to `prefix+"`, and it mirrors `v` starting a selection once inside.
+
+| Key | Action |
+|---|---|
+| `h/j/k/l`, `w/b/e`, `W/B/E`, `{`/`}` | motions |
+| `ctrl+u`/`ctrl+d`, `ctrl+f`/`ctrl+b` | half/full page |
+| `/` `?`, then `n`/`N` | search (smart-case), repeat |
+| `v` / Space | start selection |
+| `y` / Enter | yank to clipboard |
+| `q` / Esc | leave without copying |
+
+Unlike tmux, copy mode does **not** pause the pane — output stays live and
+follows at the bottom, pinning when you scroll into history. `ctrl+b` will not
+page up because the prefix claims it; use `ctrl+u`/`ctrl+d`.
+
+Mouse drag-select copies without entering copy mode at all
+(`ui.copy_on_select` defaults to true).
 
 ## Dependency: Ghostty `macos-option-as-alt`
 
