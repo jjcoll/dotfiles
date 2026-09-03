@@ -1,7 +1,6 @@
 [theme]
 # Base nord, overridden to nightfox's nordfox palette below.
 name = "nord"
-auto_switch = false
 
 [theme.custom]
 accent = "#5e81ac"        # nord10 — Nord's own selection blue, reads as a fill
