@@ -66,8 +66,7 @@ export PATH
 # --- tool init ----------------------------------------------------------
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 [ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
-# gcloud SDK still lives under ~/Downloads — see .zshrc.md § Landmines
-GCLOUD_SDK="$HOME/Downloads/google-cloud-sdk"
+GCLOUD_SDK="$HOME/.local/share/google-cloud-sdk"
 [ -f "$GCLOUD_SDK/path.zsh.inc" ] && . "$GCLOUD_SDK/path.zsh.inc"
 [ -f "$GCLOUD_SDK/completion.zsh.inc" ] && . "$GCLOUD_SDK/completion.zsh.inc"
 unset GCLOUD_SDK

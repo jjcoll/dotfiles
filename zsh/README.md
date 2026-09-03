@@ -27,7 +27,7 @@ Everything else in `.zshrc` is guarded — missing tools are skipped silently.
 
 - `~/.zshrc.local` — secrets (API tokens). Machine-local, never committed.
 - conda — install anaconda at `/opt/anaconda3`; the lazy shim picks it up.
-- gcloud SDK — re-run `gcloud init`; adjust the path in `.zshrc` if it lands
-  somewhere other than `~/Downloads/google-cloud-sdk`.
+- gcloud SDK — install to `~/.local/share/google-cloud-sdk` (the path `.zshrc`
+  expects), then `gcloud init`.
 - Antigravity / bun / maestro / libpq PATH entries — harmless if absent.
 - A prompt worth the name. Plain zsh for now — see [.zshrc.md](./.zshrc.md#prompt).
