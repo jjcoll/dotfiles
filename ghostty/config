@@ -8,8 +8,8 @@ theme = Nordfox
 # left = left Option only; right Option still types é/ñ/etc.
 macos-option-as-alt = left
 
-# Dark-only: panes on nordfox bg0, darker than the theme default bg1, so
-# herdr chrome reads as a layer above them.
+# Dark-only: panes on nordfox bg1 (#2e3440). herdr chrome sits on bg0 (#232831),
+# darker, so the sidebar reads as a layer BELOW the panes.
 background = #2e3440
 
 # Steady block cursor; Claude Code never emits DECSCUSR so shape is ours to set.

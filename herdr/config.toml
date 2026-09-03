@@ -4,25 +4,33 @@ name = "nord"
 
 [theme.custom]
 accent = "#5e81ac"        # nord10 — Nord's own selection blue, reads as a fill
-panel_bg = "#2e3440"      # bg1 — panes
-sidebar_bg = "#232831"    # bg0 — chrome sits BELOW the panes, so dim fg still reads
-active_row_bg = "#2e3440" # bg1
-selection_bg = "#39404f"  # bg2
+
+# Layering: chrome (bg0) sits BELOW panes (bg1), the active sidebar row lifts
+# ABOVE both (bg2). Panes match ghostty's `background` exactly, so the pane area
+# is seamless while the sidebar stays a visibly separate layer.
+sidebar_bg = "#232831"    # bg0 — chrome, darkest
+panel_bg = "#2e3440"      # bg1 — panes, == ghostty `background`
+active_row_bg = "#39404f" # bg2 — was bg1, i.e. identical to the pane background,
+                          #       so the active row read as no highlight at all
+selection_bg = "#3e4a5b"  # sel0 — was bg2, now distinct from active_row_bg
+surface0 = "#39404f"      # bg2
+surface1 = "#444c5e"      # bg3
+surface_dim = "#232831"   # bg0
+
+# Text ramp, every rung lifted one step. herdr dims secondary tokens again on
+# top of these, which is what sank fg2/fg3 into bg0. Ratios are against bg0.
+text = "#e5e9f0"        # white.base (was fg1)  — 12.2:1
+subtext0 = "#cdcecf"    # fg1 (was fg2)         —  9.4:1
+overlay1 = "#cdcecf"    # fg1 (was fg2) — inactive tab labels
+overlay0 = "#abb1bb"    # fg2 (was off-palette #8d95a3, 4.9:1) — 6.9:1
+
 red = "#bf616a"
 green = "#a3be8c"
 yellow = "#ebcb8b"
 blue = "#81a1c1"
 teal = "#88c0d0"
-
-# Dim/secondary text. Nord's defaults sink into bg0 — these are nordfox fg2/fg3,
-# and they drive inactive tab labels and sidebar headers.
-text = "#cdcecf"        # fg1
-subtext0 = "#abb1bb"    # fg2
-overlay1 = "#abb1bb"    # fg2 — inactive tab labels
-overlay0 = "#8d95a3"    # between fg3 and fg2, still reads on bg0
-surface0 = "#39404f"    # bg2
-surface1 = "#444c5e"    # bg3
-surface_dim = "#232831" # bg0
+mauve = "#b48ead"       # magenta.base — these two were unset, so they fell
+peach = "#c9826b"       # orange.base    through to herdr's built-in nord
 
 [ui]
 status_indicators = "dots"
@@ -30,6 +38,10 @@ status_indicators = "dots"
 show_agent_labels_on_pane_borders = true
 
 agent_panel_sort = "spaces"
+
+prompt_new_workspace_name = true
+
+mouse_capture = false
 [ui.sound]
 enabled = true
 
@@ -91,6 +103,6 @@ rows = [
 [ui.sidebar.agents]
 row_gap = 1
 rows = [
-  ["state_icon", { token = "workspace", fg = "#e5e9f0", bold = true, dim = false }, { token = "tab", fg = "#abb1bb", dim = false }],
+  ["state_icon", { token = "workspace", fg = "#e5e9f0", bold = true, dim = false }, { token = "tab", fg = "#cdcecf", dim = false }],
   [{ token = "state_text", fg = "#a3be8c", dim = false }, { token = "agent", fg = "#81a1c1", dim = false }],
 ]
