@@ -79,3 +79,11 @@ lsrecent() { ls -ltU | head -${1:-10}; }
 
 # --- secrets (untracked, machine-local) ---------------------------------
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# --- herdr ---------------------------------------------------------------
+# Launching herdr from inside tmux leaks $TMUX/$TERM_PROGRAM into the herdr
+# server, and from there into every pane it ever spawns — so apps emit tmux
+# passthrough sequences nothing unwraps, and `tmux` inside a pane thinks it
+# would be nesting. Strip them at the launch boundary; TERM still describes
+# the real terminal.
+herdr() { env -u TMUX -u TERM_PROGRAM -u TERM_PROGRAM_VERSION -u TMUX_PANE command herdr "$@"; }

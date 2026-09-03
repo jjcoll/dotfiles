@@ -129,7 +129,14 @@ failing to boot — always run `config check` after editing.
 - **No `move-pane` equivalent.** The tmux `H/J/K/L`/`Y`/`O` pane-rearrangement
   binds have no herdr counterpart.
 - **`prefix+e` is not copy-mode.** It opens scrollback in `$EDITOR`.
-- **Stale `TERM_PROGRAM`.** If the server daemon was first launched from inside
-  tmux, every pane inherits `TERM_PROGRAM=tmux` and apps may emit tmux
-  passthrough sequences nothing unwraps. Fix with `herdr server stop` and
-  relaunch from a clean terminal — this kills all panes.
+- **Stale `TERM_PROGRAM` / `TMUX`.** If the server daemon was first launched
+  from inside tmux, every pane inherits `TMUX` and `TERM_PROGRAM=tmux`: apps
+  emit tmux passthrough sequences nothing unwraps, and `tmux` in a pane thinks
+  it would be nesting. Prevented going forward by the `herdr()` wrapper in
+  `../zsh/.zshrc`, which `env -u`'s those vars at the launch boundary. An
+  already-poisoned server still needs `herdr server stop` + relaunch from a
+  clean terminal. That kills every running process, but **not** your layout:
+  `session.json` restores spaces, tabs, pane splits and per-pane `cwd`, and
+  `[session] resume_agents_on_restore` (default true) resumes agent sessions
+  from their stored ids. Scrollback is lost unless
+  `[experimental] pane_history` is on.

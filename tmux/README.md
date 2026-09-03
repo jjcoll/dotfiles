@@ -7,6 +7,22 @@ across and this config stays the reference for what those keys mean.
 Plugins are managed by tpm and live in `~/.tmux/plugins/` (untracked):
 tmux-sensible, tmux-resurrect, tmux-continuum (`@continuum-restore on`).
 
+## Coexistence with herdr
+
+Two contact points, nothing else:
+
+**Shared `ctrl+b` prefix.** herdr claims it first, so tmux running *inside* a
+herdr pane needs `ctrl+b ctrl+b` or its own prefix. Not changed here — tmux is
+the standalone fallback and the whole keymap is built on `ctrl+b`.
+
+**Env leak.** herdr launched from inside a tmux pane inherits `$TMUX` and
+`TERM_PROGRAM=tmux`, and its server passes both to every pane it ever spawns.
+The `herdr()` wrapper in `../zsh/.zshrc` strips them with `env -u`.
+
+`@continuum-restore on` resurrects saved tmux sessions whenever a tmux server
+starts, so a stray `tmux` brings back old sessions. `@continuum-boot` is unset,
+so nothing starts at login.
+
 ## Decisions
 
 **`base-index 0` is re-asserted at the very bottom, after `run tpm`.** tmux-sensible
