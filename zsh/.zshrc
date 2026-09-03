@@ -5,7 +5,11 @@
 # Plain zsh, no framework: cwd, the exit code when non-zero, and the sigil.
 # Git is deliberately absent — herdr's sidebar and Claude Code both show the
 # branch already. See .zshrc.md § Prompt to add vcs_info or starship.
-PROMPT='%F{cyan}%~%f %(?..%F{red}%?%f )%F{green}%#%f '
+# %2~ = last two path segments; leading newline separates commands in scrollback;
+# %(?..) shows the exit code only when non-zero; RPROMPT time auto-hides on long
+# lines. `%2~` -> `%~` for the full path.
+PROMPT=$'\n%F{cyan}%2~%f %(?..%F{red}%?%f )%F{green}%#%f '
+RPROMPT='%F{240}%*%f'
 
 # --- shell behaviour (was oh-my-zsh lib/) -------------------------------
 bindkey -e
