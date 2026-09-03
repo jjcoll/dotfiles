@@ -2,9 +2,10 @@
 # Why each block exists, and what was removed: see ./.zshrc.md
 
 # --- prompt -------------------------------------------------------------
-# Placeholder, deliberately dumb. Pick a real one later (p10k config already
-# sits unused at ~/.p10k.zsh). See .zshrc.md § Prompt.
-PROMPT='%F{cyan}%~%f %F{green}%#%f '
+# Plain zsh, no framework: cwd, the exit code when non-zero, and the sigil.
+# Git is deliberately absent — herdr's sidebar and Claude Code both show the
+# branch already. See .zshrc.md § Prompt to add vcs_info or starship.
+PROMPT='%F{cyan}%~%f %(?..%F{red}%?%f )%F{green}%#%f '
 
 # --- shell behaviour (was oh-my-zsh lib/) -------------------------------
 bindkey -e

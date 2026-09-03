@@ -30,4 +30,4 @@ Everything else in `.zshrc` is guarded — missing tools are skipped silently.
 - gcloud SDK — re-run `gcloud init`; adjust the path in `.zshrc` if it lands
   somewhere other than `~/Downloads/google-cloud-sdk`.
 - Antigravity / bun / maestro / libpq PATH entries — harmless if absent.
-- A prompt. Currently a placeholder, see [.zshrc.md](./.zshrc.md#prompt--deliberately-unfinished).
+- A prompt worth the name. Plain zsh for now — see [.zshrc.md](./.zshrc.md#prompt).
