@@ -31,9 +31,13 @@ To change a skill, edit it **in that repo** and push from there. Never edit
 overwritten on the next update. `~/.claude` is not a git repo, so running git
 there fails with `fatal: not a git repository`.
 
-Before pushing a skill change: `claude plugin validate <path>` on the plugin dir
-and on the repo root. After pushing, `claude plugin update <plugin>@coisoftware`
-and restart to pick it up.
+Releasing a skill change, in order: **bump `version` in the plugin's
+`.claude-plugin/plugin.json`** (SemVer — MAJOR if a consumer's config must change,
+MINOR for a new skill, PATCH for wording), `claude plugin validate` on the plugin dir
+and the repo root, push, then `claude plugin update <plugin>@coisoftware`. Without the
+bump that update is a silent no-op — the cache is keyed by version, so the old files
+keep loading and a restart reloads the same folder. `/reload-plugins` applies it
+mid-session; otherwise restart.
 
 ## Park a blocked ticket in Needs Decision — don't just ask in chat
 
