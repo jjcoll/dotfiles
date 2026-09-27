@@ -1,0 +1,74 @@
+{
+  "cleanupPeriodDays": 3650,
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "opus[1m]",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/eliot/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/eliot/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "firebase@firebase": true,
+    "figma@claude-plugins-official": true,
+    "ponytail@ponytail": true,
+    "dev@coisoftware": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "firebase": {
+      "source": {
+        "source": "github",
+        "repo": "firebase/firebase-tools"
+      }
+    },
+    "claude-plugins-official": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    },
+    "coisoftware": {
+      "source": {
+        "source": "github",
+        "repo": "coisoftware/skills"
+      }
+    }
+  },
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "theme": "dark",
+  "editorMode": "vim",
+  "agentPushNotifEnabled": true,
+  "skipAutoPermissionPrompt": true,
+  "voiceEnabled": false,
+  "feedbackSurveyState": {
+    "lastShownTime": 1753961916070
+  }
+}
