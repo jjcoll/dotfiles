@@ -70,3 +70,18 @@ dashboard/deck/site".
 - Do not offer to publish, do not ask if I want an artifact, do not mention artifacts. I will ask.
 - Permission is per-request and does not carry to the next task. Updating an
   artifact I point at is fine; creating a new one is not.
+
+## End a finished task with a clear-chat verdict
+
+Last line of the final response on a task, always one of two shapes:
+
+- Nothing outstanding → `✅ Done — safe to clear the chat.`
+- Something outstanding → `⏳ Left: <one line each>`, mine or yours, and say which.
+
+Counts as left, even when the code is finished: a restart or `/reload-plugins`
+needed to apply something, a decision I asked you for and you haven't answered,
+commits not pushed, a background process or dev server still running, a check
+that was skipped or failed.
+
+Don't emit the line mid-task, on a question I merely asked you to answer, or in a
+message that ends by asking me something — the ask *is* the state.
