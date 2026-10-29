@@ -107,3 +107,16 @@ rows = [
   ["state_icon", { token = "workspace", fg = "#e5e9f0", bold = true, dim = false }, { token = "tab", fg = "#cdcecf", dim = false }],
   [{ token = "state_text", fg = "#a3be8c", dim = false }, { token = "agent", fg = "#81a1c1", dim = false }],
 ]
+
+# herdr-nvim plugin (nvim half: ~/.config/nvim/lua/plugins/herdr.lua)
+[[keys.command]]
+key = "prefix+e"
+type = "plugin_action"
+command = "chmarax.herdr-nvim.toggle"
+description = "nvim sidebar"
+
+[[keys.command]]
+key = "prefix+o"
+type = "plugin_action"
+command = "chmarax.herdr-nvim.pick-file"
+description = "open file from agent output"
