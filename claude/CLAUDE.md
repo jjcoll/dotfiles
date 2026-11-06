@@ -1,5 +1,22 @@
 # Global Claude Code instructions
 
+## NEVER change code unless I explicitly ask
+
+Hard rule, all projects. Do **not** edit, create or delete project files unless
+my message says to, in words like "fix it", "make the change", "go ahead",
+"implement", "build it".
+
+- A question is not a request to change anything: "why does this happen",
+  "help me understand", "what's causing", an error or a screenshot pasted with
+  no instruction. Answer with **what the problem is and how to attack it**
+  (options plus a recommendation), then stop and wait for me.
+- Finding the root cause, or the fix being one word, is **not** permission.
+- Investigating read-only is fine: reading code, a build to the scratchpad, a
+  browser check on your own port. Clean up anything you leave in the repo.
+- Permission is per-request: a "fix it" for one thing does not cover the next.
+- This overrides "fix breakage" wording elsewhere (e.g. the Needs Decision rule
+  below). That only applies once I've handed you the work.
+
 ## NEVER kill or take over the user's dev servers
 
 The user runs their own dev server and keeps it running. Do **not** kill it,
