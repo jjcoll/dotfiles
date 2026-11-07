@@ -88,6 +88,18 @@ dashboard/deck/site".
 - Permission is per-request and does not carry to the next task. Updating an
   artifact I point at is fine; creating a new one is not.
 
+## Plan mode: a ticket's plan lives outside the chat
+
+When I pick **plan** for a ticket (at `/ticket:start`, or "let's plan this" mid-work), the
+plan is a document on the ticket — format and loop in the `ticket` plugin's `PLAN-DOC.md`.
+Holds with or without a ticket skill loaded:
+
+- One item at a time. An OK covers the item we're on, never the rest of the plan.
+- A side discussion ends with its outcome written to the plan, then the current item
+  shown again — I shouldn't have to remember where we were.
+- Write the plan before telling me; a decision only in chat is lost at the next clear.
+- After a `/clear`, "continue <KEY>" (`/ticket:continue`) resumes from the plan.
+
 ## End a finished task with a clear-chat verdict
 
 Last line of the final response on a task, always one of two shapes:
