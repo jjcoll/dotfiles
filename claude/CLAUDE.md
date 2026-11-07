@@ -10,6 +10,9 @@ my message says to, in words like "fix it", "make the change", "go ahead",
   "help me understand", "what's causing", an error or a screenshot pasted with
   no instruction. Answer with **what the problem is and how to attack it**
   (options plus a recommendation), then stop and wait for me.
+- Agreement is not permission. "Makes sense", "yes", "ok", "sounds good" in reply to a
+  proposal confirm the proposal, nothing more. Don't ask "OK to build X?"; ask whether X
+  is right, and wait for me to say build.
 - Finding the root cause, or the fix being one word, is **not** permission.
 - Investigating read-only is fine: reading code, a build to the scratchpad, a
   browser check on your own port. Clean up anything you leave in the repo.
@@ -94,7 +97,9 @@ When I pick **plan** for a ticket (at `/ticket:start`, or "let's plan this" mid-
 plan is a document on the ticket — format and loop in the `ticket` plugin's `PLAN-DOC.md`.
 Holds with or without a ticket skill loaded:
 
-- One item at a time. An OK covers the item we're on, never the rest of the plan.
+- Decide first, build after. Every item is agreed one at a time, and an OK is a decision,
+  never a build order. Building starts only when I say "build it", then goes item by item
+  with my review after each.
 - A side discussion ends with its outcome written to the plan, then the current item
   shown again — I shouldn't have to remember where we were.
 - Write the plan before telling me; a decision only in chat is lost at the next clear.
